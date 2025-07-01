@@ -1,0 +1,17 @@
+:root {
+  --sans-serif-font: 'Ubuntu', Arial, sans-serif;
+  --playful-font: 'Pacifico', cursive;
+
+  --primary-color: rgba(0, 0, 0, 1);
+  --secondary-color: rgba(255, 173, 217, 1);
+  --accent-color: rgba(255, 155, 203, 1);
+
+  font-family: var(--sans-serif-font);
+  color: var(--primary-color);
+}
+
+html, body {
+  height: 100%;
+  overflow-y: hidden;
+  margin: 0;
+}
