@@ -9,9 +9,3 @@
   font-family: var(--sans-serif-font);
   color: var(--primary-color);
 }
-
-html, body {
-  height: 100%;
-  overflow-y: hidden;
-  margin: 0;
-}

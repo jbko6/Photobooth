@@ -45,14 +45,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
+  }
+
+  .desktop-warning {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
   }
 
   .header-container {
     display: flex;
     height: 80%;
     transition: height 1s ease;
-    padding-top: 15%;
+    padding-top: 2em;
     padding-bottom: 0;
   }
 
@@ -61,6 +69,7 @@
   }
 </style>
 
+{#if document.documentElement.clientWidth < 800}
 <main bind:this={main}>
   <div class={[ "header-container", appState != AppState.Intro ? "headerMoveUp" : "" ]}>
     <Header bind:this={header} />
@@ -80,3 +89,12 @@ Stand in front of the QR code!"
       <ResultView bind:captures startOver={() => {appState = AppState.Snap; captures = []}}></ResultView>
   {/if}
 </main>
+{:else}
+<main bind:this={main}>
+  <div class="desktop-warning">
+    <h1>Desktop Mode Not Supported</h1>
+    <p>This photobooth is designed for mobile devices. Please use a mobile device to take photos.</p>
+    <p>Thank you!</p>
+  </div>
+</main>
+{/if}

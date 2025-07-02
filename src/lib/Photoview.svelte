@@ -25,8 +25,8 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        padding-top: 10%;
         width: 85%;
+        max-width: 400px;
     }
 
     .photos-controls-container {
@@ -146,11 +146,13 @@
                         canvases[photosTaken].getContext('2d')?.drawImage(video!!, -1055, -350, 2450, 1837);
                         captures.push(canvases[photosTaken].transferToImageBitmap());
                         photosTaken++;
+                        console.log("Captured photo");
                     }
                 } else {
                     countdown = 3;
                     if (photosTaken >= 3) {
                         countdown = -1;
+                        console.log("All photos taken, completing.");
                         onComplete();
                         clearInterval(interval);
                     }

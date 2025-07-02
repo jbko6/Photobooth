@@ -43,22 +43,29 @@
 
     onMount(() => {
         const ctx = stripCanvas?.getContext("2d");
-        if (!ctx) return;
+        if (!ctx) {
+            console.error("Failed to get canvas context");
+            return;
+        }
 
         // Fill the entire canvas with a background color
         ctx.fillStyle = "#FFDCEB"; // Using CSS variable
         ctx.fillRect(0, 0, stripCanvas!!.width, stripCanvas!!.height);
+        console.log("Canvas initialized and filled with background color");
 
         // Draw each photo onto the strip canvas
         captures.forEach((capture, index) => {
             ctx.drawImage(capture, 11, 10 + index * 430, 315, 420);
+            console.log(`Photo ${index + 1} drawn on strip canvas`);
         });
         const header = new Image();
         header.src = "assets/image/header.png";
         header.onload = () => {
             ctx.drawImage(header, 50, 1300, 245, 85);
+            console.log("Header drawn on strip canvas");
         }
         setTimeout(() => {
+            console.log("Photo strip animation complete");
             complete = true;
         }, 6500); // Adjust the timeout as needed
     });
@@ -76,14 +83,9 @@
         width: 85%;
     }
 
-    .resultsview-text {
-        font-size: 40px;
-        margin-bottom: 27px;
-        white-space: pre-wrap;
-    }
-
     .slot {
         width: 50vw;
+        max-width: 400px;
         height: 5px;
         border-radius: 4px;
         border: 3px solid var(--secondary-color);

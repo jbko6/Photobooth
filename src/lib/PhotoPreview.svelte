@@ -9,15 +9,17 @@
             console.error("Video element is not bound.");
             return;
         }
-        if (video?.canPlayType("application/vnd.apple.mpegurl")) {
+        if (video?.canPlayType("application/vnd.apple.mpegurl") == "probably") {
             video.src = src;
         } else if (Hls.isSupported()) {
-            const hls = new Hls();
+            const hls = new Hls({debug: true});
             hls.loadSource(src);
             hls.attachMedia(video);
             video.addEventListener("play", () => {
                 ready = true;
             });
+        } else {
+            console.error("HLS is not supported in this browser.");
         }
     });
 
@@ -32,7 +34,7 @@
         box-shadow: 0px 0px 10px 5px rgba(from var(--accent-color) r g b / 0.25);
         overflow: hidden;
         padding: 0;
-        background: repeat url("assets/image/pattern.png");
+        background: repeat url("../image/pattern.png");
         animation: scrollBackground 30s linear infinite;
         position: relative;
     }
@@ -64,7 +66,13 @@
 </style>
 
 <div class="preview-container">
-    <video class={["preview-video", ready ? "" : "hidden"]} bind:this={video} muted autoplay bind:this={video}>  
+    <video 
+        class={["preview-video", ready ? "" : "hidden"]} 
+        bind:this={video} 
+        muted autoplay 
+        playsinline={true}
+        crossorigin="anonymous" bind:this={video}
+    >  
         Sorry, something went wrong with the video stream. Try refreshing the page.
     </video>
 </div>
